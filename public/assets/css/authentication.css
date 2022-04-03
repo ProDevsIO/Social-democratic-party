@@ -1,0 +1,12 @@
+.auth-fluid .auth-fluid-form-box {
+    max-width: 640px !important;
+}
+.auth-logo .logo-dark {
+    display: inline;
+}
+@media (min-width: 992px) {
+    .auth-brand {
+        position: inherit;
+        margin-bottom: 0;
+    }
+}
