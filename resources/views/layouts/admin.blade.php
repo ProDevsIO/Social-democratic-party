@@ -8,7 +8,7 @@
     <meta content="ProDevs Outsourcing Ltd" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/images/undraw_voting_nvu7.svg">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
 
     <!-- Plugins css -->
     <link href="/assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
@@ -136,12 +136,11 @@
                 <div class="logo-box">
                     <a href="{{ url('/') }}" class="logo logo-dark text-center">
                         <span class="logo-sm">
-                            <img src="{{ url('/assets/images/undraw_voting_nvu7.svg') }}" height="40">
+                        <img src="{{ url('/assets/images/favicon.png') }}" height="60">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ url('/assets/images/undraw_voting_nvu7.svg') }}" height="40">
+                            <img src="{{ url('/assets/images/favicon.png') }}" height="60">
                             
-                            <span class="logo-lg-text-light">SDP</span>
                         </span>
                     </a>
 

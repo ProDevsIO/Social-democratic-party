@@ -9,7 +9,7 @@
     <meta content="ProDevs Outsourcing Ltd" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/images/undraw_voting_nvu7.svg">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
 
     <!-- App css -->
     <link href="/assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css"
@@ -41,14 +41,14 @@
                         <div class="auth-logo">
                             <a href="{{ url('/') }}" class="logo logo-dark text-center">
                                 <span class="logo-lg">
-                                    <img src="/assets/images/undraw_voting_nvu7.svg" alt="" height="125">
+                                    <img src="/assets/images/favicon.png" alt="" height="125">
                                 </span>
                             </a>
                            
 
                             <a href="{{ url('/') }}" class="logo logo-light text-center">
                                 <span class="logo-lg">
-                                <img src="/assets/images/undraw_voting_nvu7.svg" alt="" height="125">
+                                <img src="/assets/images/favicon.png" alt="" height="125">
                                 </span>
                             </a>
                         </div>

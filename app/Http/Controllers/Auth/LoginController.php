@@ -38,8 +38,14 @@ class LoginController extends Controller
 
             return redirect()->to('/admin/dashboard');
         }
-dd('hey');
+
         session()->flash('alert-danger', 'Login Incorrect, Kindly check your username/password.');
         return back();
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->to('/login');
     }
 }
