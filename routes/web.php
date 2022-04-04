@@ -18,7 +18,12 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('dashboard');
+    Route::get('/admin/forms', [App\Http\Controllers\Admin\AdminController::class, 'view_forms'])->name('forms');
+    Route::get('/admin/categories', [App\Http\Controllers\Admin\AdminController::class, 'view_categoriess'])->name('categories');
+    Route::get('/admin/positions', [App\Http\Controllers\Admin\AdminController::class, 'view_positions'])->name('positions');
+
 });
 
 

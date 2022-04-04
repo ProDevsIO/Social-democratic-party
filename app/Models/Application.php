@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormPositions extends Model
+class Application extends Model
 {
     use HasFactory;
 
@@ -16,6 +16,16 @@ class FormPositions extends Model
      */
     protected $fillable = [
         'form_id',
-        'position_id'
-     ];
+        'category_id',
+        'position_id',
+        'first_name',
+        'last_name',
+        'email',
+        'phone_no',
+        'date_of_birth',
+        'reference',
+        'payment_type',
+        'status'
+    ];
+   
 }
