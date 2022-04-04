@@ -21,10 +21,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('dashboard');
     Route::get('/admin/forms', [App\Http\Controllers\Admin\AdminController::class, 'view_forms'])->name('forms');
+    Route::get('/admin/form/position/view/{id}', [App\Http\Controllers\Admin\AdminController::class, 'view_form_positions'])->name('form_postion');
     Route::get('/admin/categories', [App\Http\Controllers\Admin\AdminController::class, 'view_categories'])->name('categories');
     Route::get('/admin/positions', [App\Http\Controllers\Admin\AdminController::class, 'view_positions'])->name('positions');
 
     Route::post('/admin/form/add', [App\Http\Controllers\Admin\AdminController::class, 'add_forms'])->name('add_forms');
+    Route::post('/admin/form/position/add/{id}', [App\Http\Controllers\Admin\AdminController::class, 'add_form_positions'])->name('add_form_postion');
 
     Route::post('/admin/category/add', [App\Http\Controllers\Admin\AdminController::class, 'add_categories'])->name('add_categories');
 

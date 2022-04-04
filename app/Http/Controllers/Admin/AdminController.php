@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Services\FormService;
 use App\Services\PositionService;
 use App\Services\CategoriesService;
+use App\Services\FormPositionService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -108,4 +109,46 @@ class AdminController extends Controller
         }
       
     }
+
+    public function view_form_positions($id)
+    {
+        $formPositionService = new FormPositionService;
+        $positionService = new PositionService;
+        $categoryService = new CategoriesService;
+        $formService = new FormService;
+        $form = $formService->getFormbyId($id);
+        $formPositions = $formPositionService->getAllFormPositionsByformId($id);
+        $positions = $positionService->getAllPositions();
+        $categories = $categoryService->getAllCategory();
+        return view('admin.view_form_positions')->with(compact('formPositions', 'positions', 'categories', 'form'));
+    }
+
+    public function add_form_positions(Request $request, $id)
+    {
+        
+        DB::beginTransaction();
+        try {
+            $this->validate($request, [
+                'category_id' => "required",
+                'positon_id' => "required",
+                'fee' => "required|numeric|min:5000"
+            ]);
+
+            $request_data = $request->all();
+            $request_data['form_id'] = $id;
+          
+            $formPositionService = new FormPositionService;
+            $formPositionService->createFormPositions($request_data);
+            DB::commit();
+
+            session()->flash('alert-success', "form position created successfully");
+            return back();
+        } catch (\Exception $e) {
+            DB::rollback();
+           dd($e);
+            session()->flash('alert-danger', "Couldnt complete this action. Something went wrong");
+            return back();
+        }
+    }
+
 }

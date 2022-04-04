@@ -17,9 +17,13 @@ class FormService
         return Form::get();
     }
 
+    public function getFormbyId($id)
+    {
+        return Form::where('id', $id)->first();
+    }
+    
     public function createForms($request)
     {
-     
         return Form::create($request);
     }
 
