@@ -47,7 +47,8 @@ class FormController extends Controller
             foreach($formPositions as $position){
                 $data[] = [
                     'id' => $position->positon_id,
-                    'name' => $position->position->name
+                    'name' => $position->position->name,
+                    'fee' => number_format($position->fee)
                 ];
             }
         }else{

@@ -29,33 +29,44 @@
                                
                             </div>
 
-                            <form action="#">
+                            <form action="{{url('form/fill/submit')}}" method="POST" enctype="multipart/form-data">
 
                                 <div class="mb-3">
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <label for="fullname" class="form-label">First Name</label>
+                                        <div class="col-sm-6 mt-2">
+                                            <label for="fullname" class="form-label">First Name <span class="text-danger">*</span></label>
                                             <input class="form-control" type="text" id="fullname" name="first_name" placeholder="Enter your name" required>
                                         </div>
-                                        <div class="col-sm-6">
-                                           <label for="fullname" class="form-label">last Name</label>
+                                        <div class="col-sm-6 mt-2">
+                                           <label for="fullname" class="form-label">last Name <span class="text-danger">*</span></label>
                                             <input class="form-control" type="text" id="fullname" name="last_name" placeholder="Enter your name" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address</label>
+                                    <label for="emailaddress" class="form-label">Email address <span class="text-danger">*</span></label>
                                     <input class="form-control" type="email" id="emailaddress" name="email" required placeholder="Enter your email">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Phone No</label>
+                                    <label for="emailaddress" class="form-label">Phone No <span class="text-danger">*</span></label>
                                     <input class="form-control" type="text" id="phone" name="phone_no" required placeholder="Enter your Phone number">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Date of birth</label>
+                                    <label for="emailaddress" class="form-label">Date of birth <span class="text-danger">*</span></label>
                                     <input class="form-control" type="date" id="date" name="date_of_birth" required >
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">Image</label>
+                                    <input class="form-control" type="file" id="date" name="image">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">Attachment</label>
+                                    <input class="form-control" type="file" id="date" name="attachment">
+                                </div>
+
                                
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Form Types</label>
@@ -81,8 +92,8 @@
                                     
                                         <div class="form-check">
                                             <label class="form-check-label">  <input type="radio" checked id="customRadio1" name="payment_type" value="paystack" 
-                                                    class="form-check-input"> <img src="https://www.investsmall.co/wp-content/uploads/2020/12/paystack-opengraph-1024x538.png"  alt="" height="40">
-                                               </label>
+                                                    class="form-check-input">  flutterwave <img src="https://africareinvented.com/wp-content/uploads/2021/03/Flutterwave-Logo-2.jpg"  alt="" height="20">
+                                              </label>
                                         </div>
                                 
                                 </div>
@@ -159,7 +170,7 @@ function getCategory()
             console.log(data);
             $.each(data, function (key, value) {
                 $position.append($("<div class='form-check'> <label class='form-check-label'> <input type='radio' id='customRadio1' name='position_id' value='"
-                                        + value.id +"' class='form-check-input'>"+ value.name +"</label></div>"));
+                                        + value.id +"' class='form-check-input'>"+ value.name +" </label></div>"));
             });
         }else{
             $position.show();
