@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showlogin'])->name('login');
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/form', [App\Http\Controllers\Forms\FormController::class, 'showForm'])->name('form');
+
+Route::get('/form/fill/category/{form_id}', [App\Http\Controllers\Forms\FormController::class, 'get_categories_for_form']);
+Route::get('/form/fill/position/{form_id}/{category_id}', [App\Http\Controllers\Forms\FormController::class, 'get_positions_for_form']);
 
 Route::middleware('auth')->group(function () {
 

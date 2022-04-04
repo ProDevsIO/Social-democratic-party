@@ -8,7 +8,7 @@
     <meta content="ProDevs Outsourcing Ltd" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="shortcut icon" href="/assets/images/sdp_new_logo.png">
 
     <!-- Plugins css -->
     <link href="/assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />

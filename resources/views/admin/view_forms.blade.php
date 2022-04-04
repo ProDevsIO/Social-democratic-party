@@ -1,17 +1,6 @@
 @extends('layouts.admin')
 @section('style')
-<style>
-    .pending-campaigns:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 45px 0 rgba(0, 0, 0, 0.32);
 
-    }
-
-    .pending-campaigns {
-        cursor: pointer;
-        transition-duration: .7s;
-    }
-</style>
 
 @endsection
 @section('content')
