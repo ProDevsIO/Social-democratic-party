@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Positions;
+use App\Models\Position;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
  */
 class PositionService
 {
-    
+    public function getAllPositions()
+    {
+        return Position::get();
+    }
+
+    public function createPositions($request)
+    {
+        return Position::create($request);
+    }
 
 }

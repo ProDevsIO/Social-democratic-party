@@ -13,5 +13,14 @@ use Illuminate\Support\Facades\DB;
 class CategoriesService
 {
     
+    public function getAllCategory()
+    {
+        return Categories::get();
+    }
+
+    public function createCategory($request)
+    {
+        return Categories::create($request);
+    }
 
 }

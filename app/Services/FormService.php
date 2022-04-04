@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Forms;
+use App\Models\Form;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\DB;
  */
 class FormService
 {
-    
+    public function getAllForms()
+    {
+        return Form::get();
+    }
+
+    public function createForms($request)
+    {
+     
+        return Form::create($request);
+    }
 
 }

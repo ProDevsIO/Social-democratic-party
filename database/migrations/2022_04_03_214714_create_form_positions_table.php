@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('form_id')->nullable();
             $table->integer('positon_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->decimal('fee');
             $table->timestamps();
         });
     }
