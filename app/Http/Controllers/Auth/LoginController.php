@@ -10,13 +10,17 @@ class LoginController extends Controller
     //
     public function showLogin()
     {
+        if (auth()->check())
+        {
+            return redirect()->to('/admin/dashboard');
+        }
       
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
-        dd($request->all());
+
         $this->validate($request, [
             'email' => "required",
             'password' => "required"
@@ -25,9 +29,16 @@ class LoginController extends Controller
         $request_data = $request->all();
         unset($request_data['_token']);
         if (auth()->attempt($request_data)) {
+           
+            if(auth()->user()->type != 1){
+                auth()->logout();
+                session()->flash('alert-danger', 'Login Incorrect, Kindly check your username/password.');
+                return back();
+            }
 
             return redirect()->to('/admin/dashboard');
         }
+dd('hey');
         session()->flash('alert-danger', 'Login Incorrect, Kindly check your username/password.');
         return back();
     }

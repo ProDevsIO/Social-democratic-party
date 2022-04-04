@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>GeoTracka</title>
+    <title>SDP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Easy tracking of campaigns on advert boards" name="description" />
+    <meta content="Social-Democratic-Party portal" name="description" />
     <meta content="ProDevs Outsourcing Ltd" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
