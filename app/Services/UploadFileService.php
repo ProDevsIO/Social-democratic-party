@@ -31,7 +31,7 @@ class UploadFileService
         $attachName = time().'.'.$request->attachment->extension();  
         //move to path 
         $request->attachment->storeAs('/public/application', $attachName);
-
+        $sub_url = 'application/'.$documentName;
         $url = Storage::url($attachName);
 
         return $url;

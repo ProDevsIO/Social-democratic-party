@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Services\FormService;
+use App\Services\ApplicationService;
 use App\Services\PositionService;
 use App\Services\CategoriesService;
 use App\Services\FormPositionService;
@@ -15,7 +16,16 @@ class AdminController extends Controller
     //
     public function index()
     {
-        return view('admin.dashboard');
+        $formService = new FormService;
+        $forms = $formService->getAllForms()->count();  
+        $categoryService = new CategoriesService;
+        $categories = $categoryService->getAllCategory()->count(); 
+        $positionService = new PositionService;
+        $positions = $positionService->getAllPositions()->count();
+        $applicationService = new ApplicationService;
+        $applications =  $applicationService ->getAllApplications()->count();
+
+        return view('admin.dashboard')->with(compact('categories', 'applications', 'forms', 'positions'));
     }
 
     public function view_forms()

@@ -134,33 +134,23 @@
 
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="{{ url('/') }}" class="logo logo-dark text-center">
-                        <span class="logo-sm">
-                        <img src="{{ url('/assets/images/favicon.png') }}" height="60">
+                    <a href="{{ url('/dashboard') }}" class="logo logo-dark text-center">
+                        <span class="logo-sm mt-2">
+                          <h1 style="color:#006400">SDP</h2>
                         </span>
-                        <span class="logo-lg">
-                            <img src="{{ url('/assets/images/favicon.png') }}" height="60">
-                            
-                        </span>
-                    </a>
-
-                    <a href="index.html" class="logo logo-light text-center">
-                        <span class="logo-sm">
-                            <img src="/assets/images/logo-sm.png" alt="" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="/assets/images/logo-light.png" alt="" height="20">
+                        <span class="logo-lg mt-2">
+                          <h1 style="color:#006400">SDP</h2>
                         </span>
                     </a>
-                    <div class="dropdown-menu">
-                        <!-- item-->
-                        <a href="admin/view/advert-types" class="dropdown-item">
-                            <i class="fe-briefcase me-1"></i>
-                            <span>Board Type</span>
-                        </a>
-                    </div>
 
-
+                    <a href="{{ url('/dashboard') }}" class="logo logo-light text-center">
+                        <span class="logo-sm">
+                           <h2>SDP</h2>
+                        </span>
+                        <span class="logo-lg">
+                           <h2>SDP</h2>
+                        </span>
+                    </a>
                     <div class="clearfix"></div>
                 </div>
                 <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
@@ -225,7 +215,7 @@
                             <li class="menu-title">Navigation</li>
                            
                             <li>
-                                <a href="{{ url('/') }}">
+                                <a href="{{ url('/dashboard') }}">
                                     <i data-feather="home"></i>
                                     <span> Dashboard </span>
                                 </a>
@@ -254,55 +244,22 @@
                             </li>
 
                             <li>
-                                <a href="{{ url('/applications') }}">
+                                <a href="#settings" data-bs-toggle="collapse">
                                     <i data-feather="book-open"></i>
                                     <span> Applications </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#sidebarReport" data-bs-toggle="collapse">
-                                    <i data-feather="bar-chart"></i>
-                                    <span> Report </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarReport">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="/admin/reports">Report</a>
-                                        </li>
-                                        <!-- <li>
-                                            <a href="/admin/view/Campaign/reports">Campaign Report</a>
-                                        </li> -->
-
-                                    </ul>
-                                </div>
-                            </li>
-
-
-
-
-
-
-
-                            {{-- <li>
-                                <a href="#settings" data-bs-toggle="collapse">
-                                    <i data-feather="settings"></i>
-                                    <span> Settings </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="settings">
                                     <ul class="nav-second-level">
-                                        {{-- <li>
-                                            <a href="admin/view/advert-types">Advert Types</a>
+                                        <li>
+                                            <a href="{{ url('/applications/paid') }}">Paid </a>
                                         </li>
                                         <li>
-                                            <a href="admin/view/sizes">Sizes</a>
-                                        </li> --}}
-                                        {{--
+                                            <a href="{{ url('/applications/unpaid') }}">Unpaid</a>
+                                        </li> 
                                     </ul>
                                 </div>
-                            </li> --}}
+                            </li> 
 
 
                         </ul>

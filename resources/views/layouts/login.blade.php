@@ -39,16 +39,16 @@
                     <!-- Logo -->
                     <div class="auth-brand text-center text-lg-start">
                         <div class="auth-logo">
-                            <a href="{{ url('/') }}" class="logo logo-dark text-center">
+                            <a href="{{ url('/login') }}" class="logo logo-dark text-center">
                                 <span class="logo-lg">
-                                    <img src="/assets/images/favicon.png" alt="" height="125">
+                                    <img src="/assets/images/sdp_new_logo.png" alt="" height="125">
                                 </span>
                             </a>
                            
 
-                            <a href="{{ url('/') }}" class="logo logo-light text-center">
+                            <a href="{{ url('/login') }}" class="logo logo-light text-center">
                                 <span class="logo-lg">
-                                <img src="/assets/images/favicon.png" alt="" height="125">
+                                <img src="/assets/images/sdp_new_logo.png" alt="" height="125">
                                 </span>
                             </a>
                         </div>
