@@ -42,6 +42,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/admin/position/add', [App\Http\Controllers\Admin\AdminController::class, 'add_positions'])->name('add_positions');
 
+    Route::get('/admin/application/paid', [App\Http\Controllers\Admin\ApplicationController::class, 'view_paid_application'])->name('paid_application');
+    Route::get('/admin/application/unpaid', [App\Http\Controllers\Admin\ApplicationController::class, 'view_unpaid_application'])->name('unpaid_application');
+    Route::get('/admin/application/single/{id}', [App\Http\Controllers\Admin\ApplicationController::class, 'view_single_application'])->name('single_application');
+   
 
 });
 

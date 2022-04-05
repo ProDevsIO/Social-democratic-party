@@ -28,12 +28,12 @@ class FormPosition extends Model
 
      public function category()
      {
-        return $this->belongsTo(Categories::class, 'id');
+        return $this->belongsTo(Categories::class,'category_id', 'id');
      }
 
      public function position()
      {
-        return $this->belongsTo(Position::class,'positon_id', 'id',);
+        return $this->belongsTo(Position::class,'positon_id', 'id');
      }
 
      

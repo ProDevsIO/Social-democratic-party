@@ -48,4 +48,15 @@ class ApplicationService
         return $data;
     }
 
+    public function paidApplications()
+    {
+        return Application::where('status', 1)->get();
+    }
+
+    public function unpaidApplications()
+    {
+        return Application::where('status', 0)->get();
+    }
+
+
 }

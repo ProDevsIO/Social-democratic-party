@@ -134,7 +134,7 @@
 
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="{{ url('/dashboard') }}" class="logo logo-dark text-center">
+                    <a href="{{ url('/admin/dashboard') }}" class="logo logo-dark text-center">
                         <span class="logo-sm mt-2">
                           <h1 style="color:#006400">SDP</h2>
                         </span>
@@ -143,7 +143,7 @@
                         </span>
                     </a>
 
-                    <a href="{{ url('/dashboard') }}" class="logo logo-light text-center">
+                    <a href="{{ url('/admin/dashboard') }}" class="logo logo-light text-center">
                         <span class="logo-sm">
                            <h2>SDP</h2>
                         </span>
@@ -215,7 +215,7 @@
                             <li class="menu-title">Navigation</li>
                            
                             <li>
-                                <a href="{{ url('/dashboard') }}">
+                                <a href="{{ url('/admin/dashboard') }}">
                                     <i data-feather="home"></i>
                                     <span> Dashboard </span>
                                 </a>
@@ -252,10 +252,10 @@
                                 <div class="collapse" id="settings">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ url('/applications/paid') }}">Paid </a>
+                                            <a href="{{ url('/admin/application/paid') }}">Paid </a>
                                         </li>
                                         <li>
-                                            <a href="{{ url('/applications/unpaid') }}">Unpaid</a>
+                                            <a href="{{ url('/admin/application/unpaid') }}">Unpaid</a>
                                         </li> 
                                     </ul>
                                 </div>

@@ -19,7 +19,7 @@
                                                                 <div class="mb-3">
                                                                     <label for="first_name" class="form-label">Name*</label>
                                                                     <input required name="name" type="text"
-                                                                        class="form-control" placeholder="Enter size name" required>
+                                                                        class="form-control" placeholder="Enter Name" required>
                                                                 </div>
                                                             </div>
 

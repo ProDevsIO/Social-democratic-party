@@ -30,28 +30,28 @@
                         </div>
 
                         <div class="table-responsive">
-                        @if(count($categories) > 0)
-                            <table class="table table-centered table-striped dt-responsive nowrap w-100"
-                                id="products-datatable">
-                                <thead>
-                                    <tr>
-
-                                        <th>Name</th>
-                                       
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        @foreach($categories as $category)
+                            @if(count($categories) > 0)
+                                <table class="table table-centered table-striped dt-responsive nowrap w-100"
+                                    id="products-datatable">
+                                    <thead>
                                         <tr>
-                                            <td class="table-user">
-                                                {{$category->name}}
-                                            </td>
+
+                                            <th>Name</th>
+                                        
                                         </tr>
-                                        @endforeach 
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                            @foreach($categories as $category)
+                                            <tr>
+                                                <td class="table-user">
+                                                    {{$category->name}}
+                                                </td>
+                                            </tr>
+                                            @endforeach 
+                                    </tbody>
+                                </table>
                             @else
-                                    <h4 class="text-center">No categories created yet</h4>
+                                        <h4 class="text-center">No categories created yet</h4>
                             @endif
                         </div>
                     </div> <!-- end card-body-->
@@ -77,5 +77,5 @@
             }
 
         }
-
+</script>
 @endsection

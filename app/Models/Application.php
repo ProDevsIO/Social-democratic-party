@@ -27,5 +27,30 @@ class Application extends Model
         'payment_type',
         'status'
     ];
+
+    public function payment()
+    {
+       return $this->HasOne(ApplicationPayment::class, 'application_id', 'id');
+    }
+
+    public function form()
+    {
+       return $this->HasOne(Form::class , 'id', 'form_id');
+    }
+
+    public function category()
+    {
+       return $this->HasOne(Categories::class, 'id', 'category_id');
+    }
+
+    public function position()
+    {
+       return $this->HasOne(Position::class, 'id', 'position_id');
+    }
+
+    public function Document()
+    {
+       return $this->hasMany(ApplicationDocument::class, 'application_id','id' );
+    }
    
 }

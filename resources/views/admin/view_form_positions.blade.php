@@ -62,6 +62,7 @@
                                                 {{optional(optional($form)->position)->name}}
                                             </td>
                                             <td >
+                                          
                                                 {{optional(optional($form)->category)->name}}
                                             </td>
                                             <td>
