@@ -25,7 +25,7 @@ class ApplicationDocumentService
     public function createApplicationDocument($id,$url)
     {
         $data =[
-                'application_' => $id,
+                'application_id' => $id,
                 'url' => $url
         ];
         return ApplicationDocument::create($data);

@@ -21,10 +21,20 @@ class ApplicationService
     {
         return Application::where('id', $id)->first();
     }
+
+    public function getApplicationbyTransactionReference($trx)
+    {
+        return Application::where('reference', $trx)->first();
+    }
     
     public function createApplication($request)
     {
         return Application::create($request);
+    }
+
+    public function updateStatus($txRef)
+    {
+        return Application::where('reference', $txRef)->update(['status'=> 1]);
     }
 
     public function arrangeData($request, $transaction_ref)

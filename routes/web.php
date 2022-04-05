@@ -23,6 +23,9 @@ Route::get('/form/fill/category/{form_id}', [App\Http\Controllers\Forms\FormCont
 Route::get('/form/fill/position/{form_id}/{category_id}', [App\Http\Controllers\Forms\FormController::class, 'get_positions_for_form']);
 
 Route::post('/form/fill/submit', [App\Http\Controllers\App_form\ApplicationController::class, 'post_form']);
+Route::get('/application/payment/confirmation', [App\Http\Controllers\App_form\ApplicationController::class, 'payment_confirmation']);
+Route::get('/form/failed', [App\Http\Controllers\App_form\ApplicationController::class, 'failed_form']);
+Route::get('/form/success', [App\Http\Controllers\App_form\ApplicationController::class, 'success_form']);
 
 Route::middleware('auth')->group(function () {
 

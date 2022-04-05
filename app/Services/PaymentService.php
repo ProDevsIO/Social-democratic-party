@@ -57,4 +57,24 @@ class PaymentService
             dd(json_decode($server_output));
         }
     }
+
+    public function confirm_flutterwave($txRef)
+    {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, env('RAV_VERIFY_URL', "https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2/verify"));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt(
+            $ch,
+            CURLOPT_POSTFIELDS,
+            "txref=" . $txRef . "&SECKEY=" . env('RAVE_SECRET_KEY', 'FLWSECK_test-516babb36b12f7f60ae0a118dcc9482a-X')
+        );
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+        return $response;
+    }
 }

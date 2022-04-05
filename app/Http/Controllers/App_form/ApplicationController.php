@@ -90,4 +90,35 @@ class ApplicationController extends Controller
             return back();
         }
     }
+
+    public function payment_confirmation(Request $request)
+    {
+      
+        $txRef = $request->tx_ref;
+        $response =  $this->paymentService->confirm_flutterwave($txRef);
+        $data_response = json_decode($response);
+        
+        if (isset($data_response->data->status) && ($data_response->data->status == "successful")) {
+            //update status
+            $this->appService->updateStatus($txRef);
+         
+            return redirect()->to('/form/success?b=' . $txRef);
+        }
+
+        return redirect()->to('/form/failed?b=' . $txRef);
+    }
+
+    public function success_form(Request $request)
+    {
+       
+        $application = $this->appService->getApplicationbyTransactionReference($request->b);
+        return view('forms.success')->with(compact('application'));
+    }
+
+    public function failed_form(Request $request)
+    {
+
+        $application =$this->appService->getApplicationbyTransactionReference($request->b);
+        return view('forms.failed')->with(compact('application'));
+    }
 }
