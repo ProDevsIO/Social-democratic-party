@@ -6,8 +6,10 @@
 @section('content')
 
 <div class="container">
+
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-12 col-xl-6">
+                @include('errors.showerrors')
                     <div class="card bg-pattern">
 
                         <div class="card-body p-4">
@@ -30,41 +32,41 @@
                             </div>
 
                             <form action="{{url('form/fill/submit')}}" method="POST" enctype="multipart/form-data">
-
+                                @csrf
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-sm-6 mt-2">
                                             <label for="fullname" class="form-label">First Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text" id="fullname" name="first_name" placeholder="Enter your name" required>
+                                            <input class="form-control" type="text" id="fullname" name="first_name" value="{{old('first_name')}}" placeholder="Enter your name" required>
                                         </div>
                                         <div class="col-sm-6 mt-2">
                                            <label for="fullname" class="form-label">last Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text" id="fullname" name="last_name" placeholder="Enter your name" required>
+                                            <input class="form-control" type="text" id="fullname" name="last_name"  value="{{old('last_name')}}" placeholder="Enter your name" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Email address <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="email" id="emailaddress" name="email" required placeholder="Enter your email">
+                                    <input class="form-control" type="email" id="emailaddress" name="email"  value="{{old('email')}}" required placeholder="Enter your email">
                                 </div>
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Phone No <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" id="phone" name="phone_no" required placeholder="Enter your Phone number">
+                                    <input class="form-control" type="text" id="phone" name="phone_no"  value="{{old('phone_no')}}" required placeholder="Enter your Phone number">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Date of birth <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="date" id="date" name="date_of_birth" required >
+                                    <input class="form-control" type="date" id="date"  value="{{old('date_of_birth')}}" name="date_of_birth" required >
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Image</label>
-                                    <input class="form-control" type="file" id="date" name="image">
+                                    <input class="form-control" type="file" id="date" name="image" accept="image/png, image/jpg, image/jpeg" />
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Attachment</label>
-                                    <input class="form-control" type="file" id="date" name="attachment">
+                                    <input class="form-control" type="file" id="date" name="attachment" accept="application/pdf,application/vnd.ms-excel,application/pdf">
                                 </div>
 
                                
@@ -91,8 +93,8 @@
                                     <label for="emailaddress" class="form-label">Form Payment</label>
                                     
                                         <div class="form-check">
-                                            <label class="form-check-label">  <input type="radio" checked id="customRadio1" name="payment_type" value="paystack" 
-                                                    class="form-check-input">  flutterwave <img src="https://africareinvented.com/wp-content/uploads/2021/03/Flutterwave-Logo-2.jpg"  alt="" height="20">
+                                            <label class="form-check-label">  <input type="radio" checked id="customRadio1" name="payment_type" value="flutterwave" 
+                                                    class="form-check-input">  Flutterwave <img src="https://africareinvented.com/wp-content/uploads/2021/03/Flutterwave-Logo-2.jpg"  alt="" height="20">
                                               </label>
                                         </div>
                                 

@@ -17,6 +17,16 @@ class FormPositionService
         return FormPosition::get();
     }
 
+    public function getFormPositionbyParams($form_id, $category_id, $position_id)
+    {
+        
+        return FormPosition::where([
+                                    'form_id' => $form_id,
+                                    'category_id' => $category_id,
+                                    'positon_id' => $position_id
+                                    ])->first();
+    }
+
     public function getAllFormPositionsByformId($id)
     {
         return FormPosition::where('form_id', $id)->get();
