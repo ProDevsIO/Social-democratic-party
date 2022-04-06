@@ -57,7 +57,7 @@
                                                                 Action <i class="mdi mdi-chevron-down"></i>
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" href="/admin/form/position/view/{{$form->id}}">View Positons</a>
+                                                                <a class="dropdown-item" href="/admin/form/position/view/{{$form->id}}">View Subactegories</a>
                                                                 
                                                             </div>
                                                  </div>

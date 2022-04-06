@@ -75,7 +75,7 @@
                                             <div class="col-6">
                                                 <div class="text-end">
                                                     <h3 class="text-dark mt-1"><span data-plugin="counterup">{{$positions}}</span></h3>
-                                                    <p class="text-muted mb-1 text-truncate">Total <br>Positions</p>
+                                                    <p class="text-muted mb-1 text-truncate">Total <br>Subcategories</p>
                                                 </div>
                                             </div>
                                         </div> <!-- end row-->

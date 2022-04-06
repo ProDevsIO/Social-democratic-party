@@ -48,7 +48,7 @@ class AdminController extends Controller
             $forms = $formService->createForms($request->all());
             DB::commit();
 
-            session()->flash('alert-success', "form created successfully");
+            session()->flash('alert-success', "Form created successfully");
             return back();
         } catch (\Exception $e) {
             DB::rollback();
@@ -111,7 +111,7 @@ class AdminController extends Controller
             $positionService->createPositions($request->all());
             DB::commit();
 
-            session()->flash('alert-success', "Position created successfully");
+            session()->flash('alert-success', "Subcategory created successfully");
             return back();
         } catch (\Exception $e) {
             DB::rollback();
@@ -153,7 +153,7 @@ class AdminController extends Controller
             $formPositionService->createFormPositions($request_data);
             DB::commit();
 
-            session()->flash('alert-success', "form position created successfully");
+            session()->flash('alert-success', "Form position created successfully");
             return back();
         } catch (\Exception $e) {
             DB::rollback();

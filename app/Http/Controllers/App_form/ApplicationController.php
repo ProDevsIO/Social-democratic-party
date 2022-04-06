@@ -80,7 +80,7 @@ class ApplicationController extends Controller
             }
 
             DB::commit();
-            session()->flash('alert-success', "form created successfully");
+            session()->flash('alert-success', "Form created successfully");
             return redirect()->to($redirect_url);
         } catch (\Exception $e) {
 

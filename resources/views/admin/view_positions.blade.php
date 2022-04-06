@@ -9,7 +9,7 @@
     <div class="col-12">
         <div class="page-title-box">
 
-            <h4 class="page-title">positions</h4>
+            <h4 class="page-title">Subcategories</h4>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
                             <div class="col-sm-4">
                             
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#addposition"  class="btn btn-success mb-2"><i
-                                        class="mdi mdi-plus-circle me-2"></i> Add positions</a>
+                                        class="mdi mdi-plus-circle me-2"></i> Add Subcategories</a>
                             </div>
                             <!-- end col-->
                         </div>
@@ -51,7 +51,7 @@
                                 </tbody>
                             </table>
                             @else
-                                    <h4 class="text-center">No positions created yet</h4>
+                                    <h4 class="text-center">No Subcategories created yet</h4>
                             @endif
                         </div>
                     </div> <!-- end card-body-->

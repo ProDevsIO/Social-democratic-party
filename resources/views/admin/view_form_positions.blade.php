@@ -33,7 +33,7 @@
                             <div class="col-sm-4">
                             
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#addform"  class="btn btn-success mb-2"><i
-                                        class="mdi mdi-plus-circle me-2"></i> Add Forms Positions</a>
+                                        class="mdi mdi-plus-circle me-2"></i> Add Forms Subcategoress</a>
                             </div>
                             <!-- end col-->
                         </div>
@@ -45,7 +45,7 @@
                                 <thead>
                                     <tr>
 
-                                        <th>Position</th>
+                                        <th>Subcategories</th>
                                         <th>Category</th>
                                         <th>Fee</th>
                                         <!-- <th>Action</th> -->
@@ -86,7 +86,7 @@
                                 </tbody>
                             </table>
                             @else
-                                    <h4 class="text-center">No Forms Positions created yet</h4>
+                                    <h4 class="text-center">No Forms Subcategoriess created yet</h4>
                             @endif
                         </div>
                     </div> <!-- end card-body-->

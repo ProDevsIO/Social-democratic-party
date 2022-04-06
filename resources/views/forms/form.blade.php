@@ -168,7 +168,7 @@ function getCategory()
         {
             $position.show();
             $position.empty(); // remove old options
-            $position.append($("<label for='emailaddress' class='form-label'>Positions</label>"));
+            $position.append($("<label for='emailaddress' class='form-label'>Subcategories</label>"));
             console.log(data);
             $.each(data, function (key, value) {
                 $position.append($("<div class='form-check'> <label class='form-check-label'> <input type='radio' id='customRadio1' name='position_id' value='"
@@ -177,7 +177,7 @@ function getCategory()
         }else{
             $position.show();
             $position.empty(); // remove radio options
-            $position.append($("<p class='text-danger'> No position for this category</p>"));
+            $position.append($("<p class='text-danger'> No Subcategories for this category</p>"));
         }
     });
 }

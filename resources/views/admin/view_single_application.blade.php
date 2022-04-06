@@ -114,7 +114,7 @@
                                                     <li>
                                                         <p class="mb-2"><span class="fw-semibold me-2">Form:</span> {{$application->form ? $application->form->name : null}}</p>
                                                         <p class="mb-2"><span class="fw-semibold me-2">Category:</span> {{$application->category ? $application->category->name : null}}</p>
-                                                        <p class="mb-2"><span class="fw-semibold me-2">Position:</span>  {{$application->position ? $application->position->name : null}}</p>
+                                                        <p class="mb-2"><span class="fw-semibold me-2">Subcategory:</span>  {{$application->position ? $application->position->name : null}}</p>
                                                         <p class="mb-0"><span class="fw-semibold me-2">Amount:</span> N   {{$application->payment ? number_format($application->payment->amount_paid) : null}} </p>
                                                     </li>
                                                 </ul>
