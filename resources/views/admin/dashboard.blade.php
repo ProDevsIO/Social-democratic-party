@@ -1,17 +1,13 @@
 @extends('layouts.admin')
 @section('style')
-<style>
-    .pending-campaigns:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 45px 0 rgba(0, 0, 0, 0.32);
-
-    }
-
-    .pending-campaigns {
-        cursor: pointer;
-        transition-duration: .7s;
-    }
-</style>
+<!-- third party css -->
+<link href="/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+    type="text/css" />
+<link href="/assets/libs/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+<link href="/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
+<!-- third party css end -->
 
 @endsection
 @section('content')
@@ -108,9 +104,30 @@
                             </div> <!-- end col-->
                         </div>
 
+                        <div class="row">
+                            <div class="col-12">
+                            <div class="card-title">
+                                       <h4>Successful Applications</h4> 
+                                    </div>
+                                <div class="card">
+                                   
+                                    <div class="card-body">
+                                        @include('partials.applications', ['applications' => $paidApplications])
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+
 @endsection
 @section('script')
 <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
+<!-- third party js -->
+<script src="/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="/assets/libs/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
+<!-- third party js ends -->
 <script>
     $(document).ready(function () {
             $('#data_table').DataTable({

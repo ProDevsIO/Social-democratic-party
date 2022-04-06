@@ -23,9 +23,10 @@ class AdminController extends Controller
         $positionService = new PositionService;
         $positions = $positionService->getAllPositions()->count();
         $applicationService = new ApplicationService;
-        $applications =  $applicationService ->getAllApplications()->count();
+        $applications =  $applicationService->getAllApplications()->count();
+        $paidApplications = $applicationService ->paidApplications();
 
-        return view('admin.dashboard')->with(compact('categories', 'applications', 'forms', 'positions'));
+        return view('admin.dashboard')->with(compact('categories', 'applications', 'forms', 'positions', 'paidApplications'));
     }
 
     public function view_forms()
