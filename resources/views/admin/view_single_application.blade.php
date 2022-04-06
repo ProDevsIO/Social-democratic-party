@@ -76,7 +76,28 @@
                                                 @if(count($application->document) > 0)
                                                 <div class="mt-4">
                                                 @foreach($application->document as $document)
-                                                    <a href="{{$document->url}}" class="btn btn-success" download>Download file</a>
+                                                    @php
+                                                        $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz'];
+                                                        $explodeImage = explode('.', $document->url);
+                                                      
+                                                        $extension = end($explodeImage);
+
+                                                        if(in_array($extension, $imageExtensions))
+                                                        {
+                                                            $check = "yes";
+                                                        }else
+                                                        {
+                                                            $check = "no";
+                                                        }
+                                                    @endphp
+                                                    
+                                                    <a href="{{$document->url}}" class="btn btn-success" download>
+                                                      @if($check == "yes") 
+                                                        Download Image
+                                                      @else
+                                                        Download File
+                                                      @endif
+                                                    </a>
                                                 @endforeach
                                                 </div>
                                                  @endif
