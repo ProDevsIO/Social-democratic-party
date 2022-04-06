@@ -28,18 +28,65 @@
     @yield('style')
 </head>
 
-<body class="loading authentication-bg authentication-bg-pattern">
+<body class="loading auth-fluid-pages pb-0">
 
-    <div class="account-pages mt-5 mb-5">
-        @yield('content')
+    <div class="auth-fluid">
+        <!--Auth fluid left content -->
+        <div class="auth-fluid-form-box">
+            <div class="align-items-center d-flex h-100">
+                <div class="card-body">
+
+                    <!-- Logo -->
+                    <div class="auth-brand text-center text-lg-start">
+                        <div class="auth-logo">
+                            <a href="{{ url('/login') }}" class="logo logo-dark text-center">
+                                <span class="logo-lg">
+                                    <img src="/assets/images/sdp_new_logo.png" alt="" height="125">
+                                </span>
+                            </a>
+                           
+
+                            <a href="{{ url('/login') }}" class="logo logo-light text-center">
+                                <span class="logo-lg">
+                                <img src="/assets/images/sdp_new_logo.png" alt="" height="125">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                    @yield('content')
+
+
+
+                </div> <!-- end .card-body -->
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+        </div>
+        <!-- end auth-fluid-form-box-->
+
+        <!-- Auth fluid right content -->
+        <div class="auth-fluid-right text-center">
+            <div class="auth-user-testimonial">
+                <!-- <h2 class="mb-3 text-white">Tracking made Easy!</h2>
+                <p class="lead">
+                    Doing business without advertising is like winking at a girl in the dark. You know what you are doing, but no one else does
+                </p>
+                <h5 class="text-white">
+                    -  Stuart Britt
+                </h5> -->
+            </div> <!-- end auth-user-testimonial-->
+        </div>
+        <!-- end Auth fluid right content -->
     </div>
-    <!-- end page -->
+    <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="../assets/js/vendor.min.js"></script>
+    <script src="/assets/js/vendor.min.js"></script>
 
     <!-- App js -->
-    <script src="../assets/js/app.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
     @yield('script')
 </body>
+
 </html>

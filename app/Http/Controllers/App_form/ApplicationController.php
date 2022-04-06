@@ -47,8 +47,8 @@ class ApplicationController extends Controller
                 "category_id" => "required",
                 "position_id" => "required",
                 "payment_type" => "required",
-                "image" => "required",
-                "attachment" => "required"
+                "image" => "nullable|image|mimes:jpg,png,jpeg,gif,svg|max:4096",
+                "attachment" => "nullable|mimes:csv,txt,xlx,xls,pdf|max:2048"
             ]);
 
             $transaction_ref = uniqid('book_') . rand(10000, 999999);
