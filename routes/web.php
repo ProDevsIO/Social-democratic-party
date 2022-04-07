@@ -27,6 +27,8 @@ Route::get('/application/payment/confirmation', [App\Http\Controllers\App_form\A
 Route::get('/form/failed', [App\Http\Controllers\App_form\ApplicationController::class, 'failed_form']);
 Route::get('/form/success', [App\Http\Controllers\App_form\ApplicationController::class, 'success_form']);
 
+Route::get('/test/api', [App\Http\Controllers\App_form\ApplicationController::class, 'test']);
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('dashboard');
