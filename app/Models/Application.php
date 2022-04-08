@@ -23,6 +23,9 @@ class Application extends Model
         'email',
         'phone_no',
         'date_of_birth',
+        'state_id',
+        'lga_id',
+        'ward',
         'reference',
         'payment_type',
         'status'
@@ -51,6 +54,16 @@ class Application extends Model
     public function Document()
     {
        return $this->hasMany(ApplicationDocument::class, 'application_id','id' );
+    }
+
+    public function State()
+    {
+       return $this->hasOne(State::class, 'id', 'state_id' );
+    }
+
+    public function Lga()
+    {
+       return $this->hasOne(Lga::class, 'id', 'lga_id');
     }
    
 }

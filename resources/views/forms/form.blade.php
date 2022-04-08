@@ -45,6 +45,29 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">State of Origin <span class="text-danger">*</span></label>
+                                   <select name="state_id" class="form-control" id="state" onchange="getLga()">
+                                       <option value="">Please select a state</option>
+                                       @foreach($states as $state)
+                                            <option value="{{$state->id}}" @if(old('state_id') == $state->id ) selected @endif>{{$state->name}}</option>
+                                       @endforeach
+                                   </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">LGA <span class="text-danger">*</span></label>
+                                   <select name="lga_id" class="form-control" id="lga">
+                                       <option value="">Select a local government area </option>
+                                      
+                                   </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">Ward Level <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" id=""  value="{{old('ward')}}" name="ward" required >
+                                </div>
+
+
+                                <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Image</label>
                                     <input class="form-control" type="file" id="date" name="image" accept="image/png, image/jpg, image/jpeg" />
                                 </div>
@@ -168,7 +191,7 @@ function getCategory()
             console.log(data);
             $.each(data, function (key, value) {
                 $position.append($("<div class='form-check'> <label class='form-check-label'> <input type='radio' id='customRadio1' name='position_id' value='"
-                                        + value.id +"' class='form-check-input'>"+ value.name +" </label> <small class=''>(view requirements  <button  type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' onclick='requirements("+value.form_position_id+")' data-bs-target='#bs-example-modal-sm'> eye</button>)<small> </div> "));
+                                        + value.id +"' class='form-check-input'>"+ value.name +" </label> <small class=''>(requirements  <button  type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' onclick='requirements("+value.form_position_id+")' data-bs-target='#bs-example-modal-sm'> eye</button>)<small> </div> "));
             });
         }else{
             $position.show();
@@ -219,6 +242,41 @@ function requirements($id)
          
             $modal.empty(); // remove content
             $modal.ppend($("<p class='text-danger'> No Subcategories for this category</p>"));
+        }
+    });
+}
+
+function getLga()
+{
+    var state_id = document.getElementById('state').value;
+    console.log(state_id);
+    var $lga = $("#lga");
+    
+    var url = '/state/lgas/'+state_id;
+    
+    $.get(url, function (data) {
+        console.log(data);
+        if(data.status != false)
+        {
+           
+            console.log(data);
+            $.get(url, function (data) {
+
+                $lga.empty(); // remove old options
+
+                $lga.append($("<option value=''>Select a local government area </option>"));
+
+                $.each(data, function (key, value) {
+
+                    $lga.append($("<option></option>")
+                        .attr("value", value.id).text(value.name));
+                });
+
+            });
+        }else{
+          
+            $lga.empty(); // remove radio options
+            $category.append($("<p class='text-danger'> No lga for this state</p>"));
         }
     });
 }

@@ -72,7 +72,10 @@
                                                 
                                                 <p class="mb-2"><span class="fw-semibold me-2">Email:</span>{{$application->email}}</p>
                                                 <p class="mb-2"><span class="fw-semibold me-2">Phone:</span> {{$application->phone_no}}</p>
-                                                <p class="mb-0"><span class="fw-semibold me-2">D.O.B:</span> {{ date('M d, Y', strtotime($application->date_of_birth)) }}</p>
+                                                <p class="mb-2><span class="fw-semibold me-2">D.O.B:</span> {{ date('M d, Y', strtotime($application->date_of_birth)) }}</p>
+                                                <p class="mb-2"><span class="fw-semibold me-2">State:</span> {{$application->State->name}}</p>
+                                                <p class="mb-2"><span class="fw-semibold me-2">LGA:</span> {{$application->Lga->name}}</p>
+                                                <p class="mb-2"><span class="fw-semibold me-2">Ward:</span> {{$application->ward}}</p>
                                                 @if(count($application->document) > 0)
                                                 <div class="mt-4">
                                                 @foreach($application->document as $document)

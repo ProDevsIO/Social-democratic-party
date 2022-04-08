@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Forms;
 
 use App\Services\FormService;
+use App\Services\StateService;
 use App\Services\FormPositionService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -13,9 +14,12 @@ class FormController extends Controller
     //
     public function showForm()
     { 
+
         $formService = new FormService;
+        $stateService = new StateService;
         $forms = $formService->getAllForms();
-        return view('forms.form')->with(compact('forms'));
+        $states =  $stateService->getAllStates();
+        return view('forms.form')->with(compact('forms','states'));
     }
 
     public function get_categories_for_form($id)
@@ -70,6 +74,26 @@ class FormController extends Controller
                     'requirements' => $formPositions->requirements,
                 ];
         
+        }else{
+            $data['status'] = false;
+        }
+
+        return $data;
+    }
+
+    public function get_Lga_by_state_id($id)
+    {
+        $stateService = new StateService;
+       
+        $lgas =  $stateService->getlgaByStateId($id); 
+        $data = [];
+        if(count($lgas) > 0){
+            foreach($lgas as $lga){
+                $data[] = [
+                    'id' => $lga->id,
+                    'name' => $lga->name,
+                ];
+            }
         }else{
             $data['status'] = false;
         }
