@@ -67,11 +67,17 @@
                                 </div>
 
                                 <div class="mb-3" id="payment" >
-                                    <label for="emailaddress" class="form-label">Form Payment</label>
+                                    <label for="emailaddress" class="form-label">Mode of Payment</label>
                                     
-                                        <div class="form-check">
-                                            <label class="form-check-label">  <input type="radio" checked id="customRadio1" name="payment_type" value="flutterwave" 
+                                        <div class="form-check mb-2">
+                                            <label class="form-check-label">  <input type="radio"  id="customRadio1" name="payment_type" value="Flutterwave" 
                                                     class="form-check-input">  Flutterwave <img src="https://africareinvented.com/wp-content/uploads/2021/03/Flutterwave-Logo-2.jpg"  alt="" height="20">
+                                              </label>
+                                        </div>
+                                       
+                                        <div class="form-check">
+                                            <label class="form-check-label">  <input type="radio" id="customRadio1" name="payment_type" value="Bema-Switch" 
+                                                    class="form-check-input">  Bema-Switch <img src="https://dashboard.teflonhub.com/images/logo.png" alt="" height="20">
                                               </label>
                                         </div>
                                 

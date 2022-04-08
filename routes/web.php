@@ -26,6 +26,10 @@ Route::post('/form/fill/submit', [App\Http\Controllers\App_form\ApplicationContr
 Route::get('/application/payment/confirmation', [App\Http\Controllers\App_form\ApplicationController::class, 'payment_confirmation']);
 Route::get('/form/failed', [App\Http\Controllers\App_form\ApplicationController::class, 'failed_form']);
 Route::get('/form/success', [App\Http\Controllers\App_form\ApplicationController::class, 'success_form']);
+Route::get('/teflon/card-details', [App\Http\Controllers\App_form\ApplicationController::class, 'view_teflon_card_form']);
+Route::post('/teflon/accept/payment', [App\Http\Controllers\App_form\ApplicationController::class, 'post_teflon_payment']);
+Route::get('/charges/successful', [App\Http\Controllers\App_form\ApplicationController::class, 'teflon_success_callback']);
+
 
 Route::get('/test/api', [App\Http\Controllers\App_form\ApplicationController::class, 'test']);
 

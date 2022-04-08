@@ -78,25 +78,25 @@ class PaymentService
         return $response;
     }
 
-    public function getTeflonhubData($request, $amount)
+    public function getTeflonhubData($app)
     {
+        $reference = $this->encrypt_decrypt("encrypt", $app->reference);
         $data = [
-            
             "public_key"=>  env('BEMA_TEST_PUBLIC_KEY',"FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X"),
             "charge_type"=>"card",
-            "transaction_reference"=>"2URIO090OPNRYUR0120L045",
-            "email"=> $request->email,
-            "amount"=> $amount,
+            "transaction_reference"=> $app->reference,
+            "email"=> $app->email,
+            "amount"=> $app->payment->price,
             "currency"=>"NGN",
             "medium"=>"web",
-            "redirect_url"=>"https://bemaswitch-beta-prod.herokuapp.com/v1/charges/validate_redirect"
+            "redirect_url"=> env('BEMA_REDIRECT_URL',"http://127.0.0.1:8000/charges/successful")
         ];
 
-        return $request;
+        return $data;
        
     }
 
-    public function initiateTeflonhubCharge()
+    public function initiateTeflonhubCharge($request)
     {
         $ch = curl_init();
         $headr = array();
@@ -119,16 +119,16 @@ class PaymentService
         }
     }
 
-    public function getTeflonhubAuthoriseData($request, $amount)
+    public function getTeflonhubAuthoriseData($request, $response)
     {
         $data =[
-            "public_key"=>  "bspk_test_fc4f7bb0b4",
+            "public_key"=>  env('BEMA_TEST_PUBLIC_KEY',"FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X"),
             "charge_type"=>"card",
-            "uuid"=> $request->uuid ?? "KAS530243421BC245574FC4",
+            "uuid"=> $response->uuid ?? "KAS530243421BC245574FC4",
             "card_number" => $request->card,
             "expiry_month" => $request->month,
             "expiry_year" => $request->year,
-            "card_expiry" => $request->expire,
+            "card_expiry" => $request->month .'/'.$request->year,
             "cvv"=> $request->cvv,
             "suggested_auth"=> "PIN",
             "pin" => $request->pin          
@@ -137,7 +137,7 @@ class PaymentService
         return $data; 
     }
 
-    public function TeflonhubPayAuthorise($request, $amount)
+    public function teflonhubPayAuthorisePayment($data)
     {
         $ch = curl_init();
         $headr = array();
@@ -167,6 +167,30 @@ class PaymentService
          }catch (\Exception $e){
              return $server_output;
          }
+    }
+
+    public function encrypt_decrypt($action, $string)
+    {
+        $output = false;
+
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'members';
+        $secret_iv = 'groupy';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+        if ($action == 'encrypt') {
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        } else if ($action == 'decrypt') {
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+
+        return $output;
     }
 
 }

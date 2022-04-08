@@ -73,10 +73,16 @@ class ApplicationController extends Controller
                 $this->appDocumentService->createApplicationDocument($application_id, $attach_url);
             }
 
-            if($request->payment_type == "flutterwave")
+            if($request->payment_type == "Flutterwave")
             {
                 $data = $this->paymentService->getFlutterwaveData($application, $formPosition->fee, $transaction_ref);
                 $redirect_url = $this->paymentService->processFL($data);
+            }
+
+            if($request->payment_type == "Bema-Switch")
+            {
+                $encrypted_ref = $this->paymentService->encrypt_decrypt("encrypt", $transaction_ref);
+                $redirect_url = env('APP_URL').'teflon/card-details?transact='. $encrypted_ref;
             }
 
             DB::commit();
@@ -124,37 +130,37 @@ class ApplicationController extends Controller
 
     public function test()
     {
-        // $request =[
+        $request =[
             
-        //     "public_key"=>  env('BEMA_TEST_PUBLIC_KEY',"FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X"),
-        //     "charge_type"=>"card",
-        //     "transaction_reference"=>"2URIO090OPNRYUR0120L045",
-        //     "email"=>"tony@386konsult.com",
-        //     "amount"=>1000,
-        //     "currency"=>"NGN",
-        //     "medium"=>"web",
-        //     "redirect_url"=>"https://bemaswitch-beta-prod.herokuapp.com/v1/charges/validate_redirect"
-        // ];
+            "public_key"=>  env('BEMA_TEST_PUBLIC_KEY',"FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X"),
+            "charge_type"=>"card",
+            "transaction_reference"=>"2URIO090OPNRYUR0120L045",
+            "email"=>"tony@386konsult.com",
+            "amount"=>1000,
+            "currency"=>"NGN",
+            "medium"=>"web",
+            "redirect_url" => "https://bemaswitch-beta-prod.herokuapp.com/v1/charges/validate_redirect"
+        ];
 
-        // $ch = curl_init();
-        // $headr = array();
-        // $headr[] = 'Content-type: application/json';
+        $ch = curl_init();
+        $headr = array();
+        $headr[] = 'Content-type: application/json';
     
-        // curl_setopt($ch, CURLOPT_URL, "http://dashboard.teflonhub.com/v1/charges/initiate");
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, $headr);
-        // curl_setopt($ch, CURLOPT_POST, 1);
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, "http://dashboard.teflonhub.com/v1/charges/initiate");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headr);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        // $server_output = curl_exec($ch);
+        $server_output = curl_exec($ch);
 
-        // curl_close($ch);
-        // try {
-        //     $server_output = json_decode($server_output);
+        curl_close($ch);
+        try {
+            $server_output = json_decode($server_output);
           
-        // }catch (\Exception $e){
-        //     dd(json_decode($server_output));
-        // }
+        }catch (\Exception $e){
+            dd(json_decode($server_output));
+        }
 
         $data =[
             
@@ -199,5 +205,63 @@ class ApplicationController extends Controller
         }catch (\Exception $e){
             dd($e);
         }
+    }
+
+    public function view_teflon_card_form(Request $request)
+    {
+      
+        $decrypted_ref = $this->paymentService->encrypt_decrypt("decrypt", $request->transact);
+        $application = $this->appService->getApplicationbyTransactionReference($decrypted_ref);
+       
+        return view('forms.card-details')->with(compact('application'));
+    }
+
+    public function post_teflon_payment(Request $request)
+    {
+        
+        DB::beginTransaction();
+        try {
+            $this->validate($request, [
+                'cvv' => "required",
+                'year' => "required",
+                'month' => "required",
+                'pin'=> "required",
+            
+            ]);
+    
+            $application =$this->appService->getApplicationbyId($request->id);
+            $initiateData = $this->paymentService->getTeflonhubData($application);//arrange the initiate Charge data payload
+            $initiated_response = $this->paymentService->initiateTeflonhubCharge($initiateData);//initiate the transaction
+            
+            if(isset($initiated_response->data))
+            {
+                $authorisedData = $this->paymentService->getTeflonhubAuthoriseData($request, $initiated_response->data);//arange the array for calling the authorize endpoint
+                $authorised = $this->paymentService->teflonhubPayAuthorisePayment($authorisedData);//call the authorized endpoint
+                
+                if(!(isset($authorised->data)))
+                {
+                    session()->flash('alert-danger', "Couldnt authorise this transaction");
+                    return back();
+                }
+            
+                return redirect()->to($authorised->data->processor_validation_url);
+            }else{
+                dd($initiated_response);
+                session()->flash('alert-danger', "Couldnt initate this transaction");
+                return back();
+            }
+            
+         } catch (\Exception $e) {
+
+            DB::rollback(); 
+            dd($e);
+            session()->flash('alert-danger', "Couldnt complete this action. Something went wrong");
+            return back();
+        }
+    }
+
+    public function teflon_success_callback()
+    {
+        dd('call_back');
     }
 }
