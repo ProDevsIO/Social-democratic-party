@@ -124,8 +124,8 @@
 
                             </form>
 
-                            <div class="modal fade" id="bs-example-modal-sm" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
+                            <div class="modal fade" id="bs-example-modal-md" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-md modal-center">
                                                 <div class="modal-content">
                                                     <div class="modal-header" style="background-color: orange">
                                                         <h4 class="modal-title" id="mySmallModalLabel">Requirements</h4>
@@ -191,7 +191,7 @@ function getCategory()
             console.log(data);
             $.each(data, function (key, value) {
                 $position.append($("<div class='form-check'> <label class='form-check-label'> <input type='radio' id='customRadio1' name='position_id' value='"
-                                        + value.id +"' class='form-check-input'>"+ value.name +" </label> <small class=''>(requirements  <button  type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' onclick='requirements("+value.form_position_id+")' data-bs-target='#bs-example-modal-sm'> eye</button>)<small> </div> "));
+                                        + value.id +"' class='form-check-input'>"+ value.name +" </label> <span class=''>(requirements  <a type='button' data-bs-toggle='modal' onclick='requirements("+value.form_position_id+")' data-bs-target='#bs-example-modal-md'> <i class='mdi mdi-eye'></i></a>)</span> </div> "));
             });
         }else{
             $position.show();
@@ -236,7 +236,7 @@ function requirements($id)
           
             $.each(data, function (key, value) {
                 console.log(value);
-                $modal.append($("<p class='text-left'>"+value.requirements+"</p>"));
+                $modal.append($("<textarea readonly class='form-control' style='border:none' cols='30' rows='10'>"+value.requirements+"</textarea>"));
             });
         }else{
          

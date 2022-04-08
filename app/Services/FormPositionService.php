@@ -61,4 +61,15 @@ class FormPositionService
         return FormPosition::create($request);
     }
 
+   public function updateFormPositions($request,$id)
+   {
+    unset($request['_token']);
+       return FormPosition::where('id', $id)->update($request);
+   }
+
+   public function deleteFormPositions($id)
+   {
+       return FormPosition::where('id', $id)->delete();
+   }
+
 }

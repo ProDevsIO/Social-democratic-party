@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/admin/form/add', [App\Http\Controllers\Admin\AdminController::class, 'add_forms'])->name('add_forms');
     Route::post('/admin/form/position/add/{id}', [App\Http\Controllers\Admin\AdminController::class, 'add_form_positions'])->name('add_form_postion');
+    Route::post('/admin/form/position/edit/{id}', [App\Http\Controllers\Admin\AdminController::class, 'edit_form_positions'])->name('edit_form_postion');
+    Route::post('/admin/form/position/delete/{id}', [App\Http\Controllers\Admin\AdminController::class, 'delete_form_positions'])->name('delete_form_postion');
 
     Route::post('/admin/category/add', [App\Http\Controllers\Admin\AdminController::class, 'add_categories'])->name('add_categories');
     Route::post('/admin/category/edit/{id}', [App\Http\Controllers\Admin\AdminController::class, 'edit_category'])->name('edit_category');

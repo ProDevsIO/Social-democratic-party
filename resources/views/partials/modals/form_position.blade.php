@@ -42,7 +42,7 @@
                                                                 <label for="first_name" class="form-label">Requirements*</label>
                                                                 <br>
                                                                 
-                                                                <textarea name="requirements" id="" class="form-control" cols="30" rows="10"></textarea>
+                                                                <textarea name="requirements" id="" class="form-control" cols="30" rows="10" required></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">

@@ -250,4 +250,31 @@ class AdminController extends Controller
         }
     }
 
+    public function edit_form_positions(Request $request, $id)
+    {
+        
+        DB::beginTransaction();
+        try {
+            $this->validate($request, [
+                'category_id' => "required",
+                'positon_id' => "required",
+                'requirements' => "required",
+                'fee' => "required|numeric|min:200"
+            ]);
+
+            $request_data = $request->all();
+            $formPositionService = new FormPositionService;
+            $formPositionService->updateFormPositions($request_data,$id);
+            DB::commit();
+
+            session()->flash('alert-success', "Form position updated successfully");
+            return back();
+        } catch (\Exception $e) {
+            DB::rollback();
+           dd($e);
+            session()->flash('alert-danger', "Couldnt complete this action. Something went wrong");
+            return back();
+        }
+    }
+
 }
