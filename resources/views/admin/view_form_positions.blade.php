@@ -18,7 +18,7 @@
     <div class="col-12">
         <div class="page-title-box">
 
-            <h4 class="page-title">Form Positions for {{ $form->name }}</h4>
+            <h4 class="page-title">Form Subcategories for {{ $form->name }}</h4>
         </div>
     </div>
 </div>
@@ -33,7 +33,7 @@
                             <div class="col-sm-4">
                             
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#addform"  class="btn btn-success mb-2"><i
-                                        class="mdi mdi-plus-circle me-2"></i> Add Forms Subcategoress</a>
+                                        class="mdi mdi-plus-circle me-2"></i> Add Forms Subcategories</a>
                             </div>
                             <!-- end col-->
                         </div>
@@ -66,7 +66,7 @@
                                                 {{optional(optional($form)->category)->name}}
                                             </td>
                                             <td>
-                                            ₦ {{number_format($form->fee)}}
+                                            NGN {{number_format($form->fee)}}
                                             </td>
                                             <!-- <td>
                                                  <div class="dropdown">

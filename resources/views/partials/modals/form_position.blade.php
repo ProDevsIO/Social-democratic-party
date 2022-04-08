@@ -10,7 +10,7 @@
                                                 <form action="{{ url('/admin/form/position/add/'.$form->id) }}" method="post">
                                                  @csrf
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title" id="standard-modalLabel">Add Form Postion </h4>
+                                                        <h4 class="modal-title" id="standard-modalLabel">Add Form Subcategories </h4>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -28,22 +28,29 @@
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <div class="mb-3">
-                                                                <label for="first_name" class="form-label">Position*</label>
+                                                                <label for="first_name" class="form-label">Subcategories*</label>
                                                                    <select name="positon_id" id="" class="form-control" required>
-                                                                   <option value="">Please select a position</option>
+                                                                   <option value="">Please select a subcatgory</option>
                                                                         @foreach($positions as $position)
                                                                         <option value="{{$position->id}}">{{$position->name}}</option>
                                                                         @endforeach
                                                                    </select>
                                                                 </div>
                                                             </div>
-                                                          
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                <label for="first_name" class="form-label">Requirements*</label>
+                                                                <br>
+                                                                
+                                                                <textarea name="requirements" id="" class="form-control" cols="30" rows="10"></textarea>
+                                                                </div>
+                                                            </div>
                                                             <div class="col-lg-12">
                                                                 <div class="mb-3">
                                                                 <label for="first_name" class="form-label">Fee*</label>
                                                                 <br>
-                                                                <span class="text-danger">Mininum amount of 5000</span>
-                                                                <input required name="fee" type="number" min="5000"
+                                                                <span class="text-danger">Mininum amount of 200</span>
+                                                                <input required name="fee" type="number" min="200"
                                                                         class="form-control" placeholder="Enter position fee" required>
                                                                 </div>
                                                             </div>

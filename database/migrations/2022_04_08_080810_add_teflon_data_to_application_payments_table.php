@@ -31,7 +31,7 @@ return new class extends Migration
     {
         Schema::table('application_payments', function (Blueprint $table) {
             //
-            if(!Schema::hasColumn('application_payments', 'charge_id', 'charge_type')){
+            if(Schema::hasColumn('application_payments', 'charge_id', 'charge_type')){
                 $table->dropColumn('charge_id');
                 $table->dropColumn('charge_type');
             }

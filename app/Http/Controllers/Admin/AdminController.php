@@ -143,12 +143,13 @@ class AdminController extends Controller
             $this->validate($request, [
                 'category_id' => "required",
                 'positon_id' => "required",
-                'fee' => "required|numeric|min:5000"
+                'requirements' => "required",
+                'fee' => "required|numeric|min:200"
             ]);
 
             $request_data = $request->all();
             $request_data['form_id'] = $id;
-          
+         
             $formPositionService = new FormPositionService;
             $formPositionService->createFormPositions($request_data);
             DB::commit();

@@ -239,7 +239,7 @@
                             <li>
                                 <a href="{{ url('/admin/positions') }}">
                                     <i data-feather="user-check"></i>
-                                    <span> Subcategoriess </span>
+                                    <span> Subcategories </span>
                                 </a>
                             </li>
 

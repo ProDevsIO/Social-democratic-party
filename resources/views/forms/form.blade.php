@@ -1,6 +1,14 @@
 @extends('layouts.login')
 @section('style')
 <link href="/assets/css/authentication.css" rel="stylesheet" type="text/css" />
+<style>
+    .modal-backdrop.show {
+        display:none !important
+    }
+    .modal-backdrop {
+        position:inherit !important
+    }
+</style>
 @endsection
 
 @section('content')
@@ -14,25 +22,25 @@
                                     <div class="row">
                                         <div class="col-sm-6 mt-2">
                                             <label for="fullname" class="form-label">First Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text" id="fullname" name="first_name" value="{{old('first_name')}}" placeholder="Enter your name" required>
+                                            <input class="form-control" type="text" id="fullname" name="first_name" value="{{old('first_name')}}" placeholder="Enter your name" required onkeydown="return /[a-z]/i.test(event.key)" maxlength='15'>
                                         </div>
                                         <div class="col-sm-6 mt-2">
-                                           <label for="fullname" class="form-label">last Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text" id="fullname" name="last_name"  value="{{old('last_name')}}" placeholder="Enter your name" required>
+                                           <label for="fullname" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" id="fullname" name="last_name"  value="{{old('last_name')}}" placeholder="Enter your name" required onkeydown="return /[a-z]/i.test(event.key)" maxlength='15'>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="email" id="emailaddress" name="email"  value="{{old('email')}}" required placeholder="Enter your email">
+                                    <label for="emailaddress" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="email" id="emailaddress" name="email"  value="{{old('email')}}" required placeholder="Enter your email" >
                                 </div>
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Phone No <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" id="phone" name="phone_no"  value="{{old('phone_no')}}" required placeholder="Enter your Phone number">
+                                    <input class="form-control" type="text" id="phone" name="phone_no"  value="{{old('phone_no')}}" required placeholder="Enter your Phone number" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" maxlength='14'>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Date of birth <span class="text-danger">*</span></label>
+                                    <label for="emailaddress" class="form-label">Date of Birth <span class="text-danger">*</span></label>
                                     <input class="form-control" type="date" id="date"  value="{{old('date_of_birth')}}" name="date_of_birth" required >
                                 </div>
 
@@ -75,11 +83,11 @@
                                               </label>
                                         </div>
                                        
-                                        <div class="form-check">
+                                        <!-- <div class="form-check">
                                             <label class="form-check-label">  <input type="radio" id="customRadio1" name="payment_type" value="Bema-Switch" onclick="getTeflonTypes()"
                                                     class="form-check-input">  Bema-Switch <img src="https://dashboard.teflonhub.com/images/logo.png" alt="" height="20">
                                               </label>
-                                        </div>
+                                        </div> -->
                                 
                                 </div>
 
@@ -93,7 +101,19 @@
 
                             </form>
 
-                           
+                            <div class="modal fade" id="bs-example-modal-sm" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background-color: orange">
+                                                        <h4 class="modal-title" id="mySmallModalLabel">Requirements</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        ...
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->          
 
                        
 
@@ -148,7 +168,7 @@ function getCategory()
             console.log(data);
             $.each(data, function (key, value) {
                 $position.append($("<div class='form-check'> <label class='form-check-label'> <input type='radio' id='customRadio1' name='position_id' value='"
-                                        + value.id +"' class='form-check-input'>"+ value.name +" </label></div>"));
+                                        + value.id +"' class='form-check-input'>"+ value.name +" </label> <small class=''>(view requirements  <button  type='button' class='btn btn-success btn-sm' data-bs-toggle='modal' onclick='requirements("+value.form_position_id+")' data-bs-target='#bs-example-modal-sm'> eye</button>)<small> </div> "));
             });
         }else{
             $position.show();
@@ -176,6 +196,31 @@ function getTeflonTypes()
             $teflon.empty(); // remove radio options
             
         }
+}
+
+function requirements($id)
+{
+    console.log($id);
+
+    var $modal = $(".modal-body");
+    var url = '/form/position/requirements/'+$id;
+    $.get(url, function (data) {
+        console.log(data);
+        if(data.status != false)
+        {
+            console.log(data);
+            $modal.empty(); // remove conteent
+          
+            $.each(data, function (key, value) {
+                console.log(value);
+                $modal.append($("<p class='text-left'>"+value.requirements+"</p>"));
+            });
+        }else{
+         
+            $modal.empty(); // remove content
+            $modal.ppend($("<p class='text-danger'> No Subcategories for this category</p>"));
+        }
+    });
 }
 </script>
 @endsection

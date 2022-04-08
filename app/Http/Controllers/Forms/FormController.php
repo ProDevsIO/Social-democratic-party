@@ -47,10 +47,29 @@ class FormController extends Controller
             foreach($formPositions as $position){
                 $data[] = [
                     'id' => $position->positon_id,
+                    'form_position_id' => $position->id,
                     'name' => $position->position->name,
                     'fee' => number_format($position->fee)
                 ];
             }
+        }else{
+            $data['status'] = false;
+        }
+
+        return $data;
+    }
+
+    public function get_requirements_for_position($id)
+    {
+        $formPositionService = new FormPositionService;
+        $formPositions = $formPositionService->getFormPositionsById($id);
+        $data = [];
+        if($formPositions != null){
+
+                $data[] = [
+                    'requirements' => $formPositions->requirements,
+                ];
+        
         }else{
             $data['status'] = false;
         }

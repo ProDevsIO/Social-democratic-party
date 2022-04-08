@@ -32,6 +32,11 @@ class FormPositionService
         return FormPosition::where('form_id', $id)->get();
     }
 
+    public function getFormPositionsById($id)
+    {
+        return FormPosition::where('id', $id)->first();
+    }
+
     public function getUniqueCategoryByformId($id)
     {
         $form =  FormPosition::where('form_id', $id)->get();
@@ -52,7 +57,7 @@ class FormPositionService
 
     public function createFormPositions($request)
     {
-        dd($request);
+    
         return FormPosition::create($request);
     }
 

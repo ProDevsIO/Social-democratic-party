@@ -21,7 +21,8 @@
                                             @foreach($applications as $application)
                                             <tr>
                                                 <td class="table-user">
-                                                    {{$application->first_name}}   {{$application->last_name}}
+                                                    {{$application->first_name}}   {{$application->last_name}}<br>
+                                                    {{$application->phone_no}}
                                                 </td>
                                                 
                                                 <td>
@@ -34,7 +35,7 @@
                                                     {{$application->position ? $application->position->name : null}}
                                                 </td>
                                                 <td>
-                                                    {{$application->payment ? number_format($application->payment->amount_paid) : null}}
+                                                    NGN {{$application->payment ? number_format($application->payment->amount_paid) : null}}
                                                 </td>
                                                 <td >
                                                     @if($application->status == 1)

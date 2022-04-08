@@ -35,7 +35,7 @@
                                             <div class="col-6">
                                                 <div class="text-end">
                                                     <h3 class="text-dark mt-1"><span data-plugin="counterup">{{$applications}}</span></h3>
-                                                    <p class="text-muted mb-1 text-truncate">Total<br> Application</p>
+                                                    <p class="text-muted mb-1 text-truncate">Total<br> Applications</p>
                                                 </div>
                                             </div>
                                         </div> <!-- end row-->
@@ -55,7 +55,7 @@
                                             <div class="col-6">
                                                 <div class="text-end">
                                                     <h3 class="text-dark mt-1"><span data-plugin="counterup">{{$forms}}</span></h3>
-                                                    <p class="text-muted mb-1 text-truncate">Total <br>forms</p>
+                                                    <p class="text-muted mb-1 text-truncate">Total <br>Forms</p>
                                                 </div>
                                             </div>
                                         </div> <!-- end row-->
@@ -95,7 +95,7 @@
                                             <div class="col-6">
                                                 <div class="text-end">
                                                     <h3 class="text-dark mt-1"><span data-plugin="counterup">{{$categories}}</span></h3>
-                                                    <p class="text-muted mb-1 text-truncate">Total <br>Category</p>
+                                                    <p class="text-muted mb-1 text-truncate">Total <br>Categories</p>
                                                 </div>
                                             </div>
                                         </div> <!-- end row-->

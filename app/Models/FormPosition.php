@@ -18,7 +18,8 @@ class FormPosition extends Model
         'form_id',
         'category_id',
         'positon_id',
-        'fee'
+        'fee',
+        'requirements'
      ];
 
      public function form()

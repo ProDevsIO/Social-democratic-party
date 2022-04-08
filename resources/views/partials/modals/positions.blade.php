@@ -10,7 +10,7 @@
                                                 <form action="position/add" method="post">
                                                  @csrf
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title" id="standard-modalLabel">Add position</h4>
+                                                        <h4 class="modal-title" id="standard-modalLabel">Add Subcategories</h4>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
