@@ -58,7 +58,7 @@ class ApplicationController extends Controller
             $application = $this->appService->getApplicationbyId($application_id);
             
             $formPosition =  $this->formPositionService->getFormPositionbyParams($request_data['form_id'], $request['category_id'], $request['position_id']);
-            $appPaymentData =  $this->appPaymentService->arrangeData($application, $formPosition->fee);
+            $appPaymentData =  $this->appPaymentService->arrangeData($application, $formPosition->fee, $request_data);
             $applicationPayment = $this->appPaymentService->createApplicationPayment($appPaymentData);
                 
             if(isset($request->image))
@@ -81,8 +81,16 @@ class ApplicationController extends Controller
 
             if($request->payment_type == "Bema-Switch")
             {
-                $encrypted_ref = $this->paymentService->encrypt_decrypt("encrypt", $transaction_ref);
-                $redirect_url = env('APP_URL').'teflon/card-details?transact='. $encrypted_ref;
+                if($request->charge_type == "Card"){
+
+                    $encrypted_ref = $this->paymentService->encrypt_decrypt("encrypt", $transaction_ref);
+                    $redirect_url = env('APP_URL').'teflon/card-details?transact='. $encrypted_ref;
+                }else{
+                   
+                    //redirect with for transfer
+                    $transact = $this->paymentService->encrypt_decrypt("encrypt", $application->reference);
+                    $redirect_url = env('APP_URL',"http://127.0.0.1:8000/")."teflon/bank-transfer/details?transact=".$transact;
+                }
             }
 
             DB::commit();
@@ -235,6 +243,7 @@ class ApplicationController extends Controller
             
             if(isset($initiated_response->data))
             {
+                $this->appPaymentService->updateApplicationPaymentChargeId($application->id, $initiated_response->data->uuid);
                 $authorisedData = $this->paymentService->getTeflonhubAuthoriseData($request, $initiated_response->data);//arange the array for calling the authorize endpoint
                 $authorised = $this->paymentService->teflonhubPayAuthorisePayment($authorisedData);//call the authorized endpoint
                 
@@ -243,7 +252,7 @@ class ApplicationController extends Controller
                     session()->flash('alert-danger', "Couldnt authorise this transaction");
                     return back();
                 }
-            
+               
                 return redirect()->to($authorised->data->processor_validation_url);
             }else{
                 dd($initiated_response);
@@ -260,8 +269,54 @@ class ApplicationController extends Controller
         }
     }
 
-    public function teflon_success_callback()
+    public function view_tarnsfer_details(Request $request)
     {
-        dd('call_back');
+        $transact = $request->transact;
+        $decrypted_ref = $this->paymentService->encrypt_decrypt("decrypt", $request->transact);
+        $application = $this->appService->getApplicationbyTransactionReference($decrypted_ref);
+        $transferData = $this->paymentService->getTeflonhubTransferData($application);//arrange the initiate transfer data payload
+        $transfer_response = $this->paymentService->initiateTeflonhubCharge($transferData);//initiate transfer Charge
+
+        if(!(isset($transfer_response->data)))
+        {
+            session()->flash('alert-danger', "Couldnt initate this transaction");
+            return back();
+        }
+
+        $this->appPaymentService->updateApplicationPaymentChargeId($application->id, $transfer_response->data->uuid);//update the chargeid(uuid) to the application payment table
+        $authorisedData = $this->paymentService->getTeflonhubAuthoriseTransferData($transfer_response->data);//arange the array for calling the authorize endpoint
+        $authorised = $this->paymentService->teflonhubPayAuthorisePayment($authorisedData);//call the authorized endpoint
+    
+        if(!(isset($authorised->data)))
+        {
+            session()->flash('alert-danger', "Couldnt authorise this transaction");
+            return back();
+        }
+        $bank = $authorised->data->payment_bank_name;
+        $account =  $authorised->data->payment_bank_account;
+
+        return view('forms.bank_transfer_details')->with(compact('bank', 'account', 'application', 'transact'));
+    }
+
+    public function teflon_success_callback(Request $request)
+    {
+        
+        if(isset($request->transact))
+        {
+            $transact = $request->transact;
+            $decrypted_ref = $this->paymentService->encrypt_decrypt("decrypt", $request->transact);
+            $application = $this->appService->getApplicationbyTransactionReference($decrypted_ref);
+            
+            if($application->payment_type == "Bema-Switch")
+            {   
+                $data = $this->paymentService->verifyTeflonTransaction($application->payment->charge_id);
+                dd($data);
+            }else{
+
+            }
+        }
+
+        dd($request);
+       
     }
 }

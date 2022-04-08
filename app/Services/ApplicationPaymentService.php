@@ -19,7 +19,7 @@ class ApplicationPaymentService
 
     public function getPaymentbyId($id)
     {
-        return Application::where('id', $id)->first();
+        return ApplicationPayment::where('id', $id)->first();
     }
     
     public function createApplicationPayment($request)
@@ -27,7 +27,14 @@ class ApplicationPaymentService
         return ApplicationPayment::create($request);
     }
 
-    public function arrangeData($app,$fee)
+    public function updateApplicationPaymentChargeId($app_id,$charge_id )
+    {
+        return ApplicationPayment::where('application_id', $app_id)->update([
+                'charge_id' => $charge_id
+        ]);
+    }
+
+    public function arrangeData($app,$fee,$request)
     {
         $data = [
                     'application_id' => $app->id,
@@ -36,7 +43,12 @@ class ApplicationPaymentService
                     'quantity'=> 1, 
                     'currency' => 'NG'
                 ];
-       
+
+        if(isset($request['charge_type']))
+        {
+            $data['charge_type'] = $request['charge_type'] ;
+        }
+
         return $data;
     }
 

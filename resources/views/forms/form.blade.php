@@ -51,7 +51,7 @@
                                     <label for="emailaddress" class="form-label">Form Types</label>
                                     @foreach($forms as $form)
                                         <div class="form-check">
-                                        <label class="form-check-label">  <input type="radio" id="customRadio1" name="form_id" value="{{$form->id}}" onclick="getFormTypes()"
+                                        <label class="form-check-label">  <input type="radio" id="customRadio1" name="form_id" value="{{$form->id}}" onclick="getFormTypes()" required
                                                     class="form-check-input">
                                                {{$form->name}}</label>
                                             </div>
@@ -70,17 +70,21 @@
                                     <label for="emailaddress" class="form-label">Mode of Payment</label>
                                     
                                         <div class="form-check mb-2">
-                                            <label class="form-check-label">  <input type="radio"  id="customRadio1" name="payment_type" value="Flutterwave" 
+                                            <label class="form-check-label">  <input type="radio"  id="customRadio1" name="payment_type" value="Flutterwave" required onclick="getTeflonTypes()"
                                                     class="form-check-input">  Flutterwave <img src="https://africareinvented.com/wp-content/uploads/2021/03/Flutterwave-Logo-2.jpg"  alt="" height="20">
                                               </label>
                                         </div>
                                        
                                         <div class="form-check">
-                                            <label class="form-check-label">  <input type="radio" id="customRadio1" name="payment_type" value="Bema-Switch" 
+                                            <label class="form-check-label">  <input type="radio" id="customRadio1" name="payment_type" value="Bema-Switch" onclick="getTeflonTypes()"
                                                     class="form-check-input">  Bema-Switch <img src="https://dashboard.teflonhub.com/images/logo.png" alt="" height="20">
                                               </label>
                                         </div>
                                 
+                                </div>
+
+                                <div class="mb-3" id="teflon-options" style="display:none">
+                                    
                                 </div>
 
                                 <div class="text-center d-grid">
@@ -152,6 +156,26 @@ function getCategory()
             $position.append($("<p class='text-danger'> No Subcategories for this category</p>"));
         }
     });
+}
+
+function getTeflonTypes()
+{
+    var payment_type = document.querySelector('input[name="payment_type"]:checked').value;
+
+    var $teflon = $("#teflon-options");
+
+        if(payment_type == "Bema-Switch")
+        {
+            $teflon.show();
+            $teflon.empty(); // remove old options  
+            $teflon.append($("<label for='emailaddress' class='form-label'>Payment Type</label>"));          
+            $teflon.append($("<div class='form-check'> <label class='form-check-label'> <input type='radio' id='customRadio1' name='charge_type' value='Card' class='form-check-input'>Card </label></div>"));
+            $teflon.append($("<div class='form-check'> <label class='form-check-label'> <input type='radio' id='customRadio1' name='charge_type' value='Transfer' class='form-check-input'>Transfer </label></div>"));
+        }else{
+            $teflon.show();
+            $teflon.empty(); // remove radio options
+            
+        }
 }
 </script>
 @endsection

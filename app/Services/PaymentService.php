@@ -96,6 +96,22 @@ class PaymentService
        
     }
 
+    public function getTeflonhubTransferData($app){
+    
+        $data = [
+            "public_key"=>  env('BEMA_TEST_PUBLIC_KEY',"FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X"),
+            "charge_type"=>"bank_transfer",
+            "transaction_reference"=> $app->reference,
+            "email"=> $app->email,
+            "amount"=> $app->payment->price,
+            "currency"=>"NGN",
+            "medium"=>"web",
+           
+        ];
+
+        return $data;
+    }
+
     public function initiateTeflonhubCharge($request)
     {
         $ch = curl_init();
@@ -137,6 +153,17 @@ class PaymentService
         return $data; 
     }
 
+    public function getTeflonhubAuthoriseTransferData($response)
+    {
+        $data =[
+            "public_key"=>  env('BEMA_TEST_PUBLIC_KEY',"FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X"),
+            "charge_type"=> "bank_transfer",
+            "uuid"=> $response->uuid,       
+        ];
+
+        return $data; 
+    }
+
     public function teflonhubPayAuthorisePayment($data)
     {
         $ch = curl_init();
@@ -169,6 +196,47 @@ class PaymentService
          }
     }
 
+    public function verifyTeflonTransaction($charge_id)
+    {
+        
+        $data =[
+            "secret_key"=> env('BEMA_TEST_PRIVATE_KEY',"FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X"),
+            'charge_id' => $charge_id
+        ];
+
+        $params = array('charge_id' => $charge_id);
+
+        $ch = curl_init();
+        $headr = array();
+        $headr= [
+            
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Encoding: gzip, deflate',
+            'Cache-Control: no-cache',
+            'Content-Type: application/json'
+        ];
+        curl_setopt($ch, CURLOPT_URL,"http://dashboard.teflonhub.com/v1/charges/:charge_id/verify");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headr);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'GET' );
+        if(env('APP_ENV') == "local"){
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        }
+        
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data), http_build_query($params));
+       
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $server_output = curl_exec($ch);
+      dd($server_output);
+        curl_close($ch);
+    
+        try {
+            return $server_output = json_decode($server_output); 
+         }catch (\Exception $e){
+             return $server_output;
+         }
+    }
     public function encrypt_decrypt($action, $string)
     {
         $output = false;
@@ -192,5 +260,7 @@ class PaymentService
 
         return $output;
     }
+
+   
 
 }

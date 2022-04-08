@@ -39,6 +39,7 @@ class ApplicationService
 
     public function arrangeData($request, $transaction_ref)
     {
+        
         $data = $request;
         unset($data['attachment']);
         unset($data['image']);
