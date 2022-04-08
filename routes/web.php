@@ -52,8 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/form/position/add/{id}', [App\Http\Controllers\Admin\AdminController::class, 'add_form_positions'])->name('add_form_postion');
 
     Route::post('/admin/category/add', [App\Http\Controllers\Admin\AdminController::class, 'add_categories'])->name('add_categories');
+    Route::post('/admin/category/edit/{id}', [App\Http\Controllers\Admin\AdminController::class, 'edit_category'])->name('edit_category');
+    Route::get('/admin/category/delete/{id}', [App\Http\Controllers\Admin\AdminController::class, 'delete_category'])->name('delete_category');
 
     Route::post('/admin/position/add', [App\Http\Controllers\Admin\AdminController::class, 'add_positions'])->name('add_positions');
+    Route::post('/admin/position/edit/{id}', [App\Http\Controllers\Admin\AdminController::class, 'edit_positions'])->name('edit_positions');
+    Route::get('/admin/position/delete/{id}', [App\Http\Controllers\Admin\AdminController::class, 'delete_positions'])->name('delete_positions');
 
     Route::get('/admin/application/paid', [App\Http\Controllers\Admin\ApplicationController::class, 'view_paid_application'])->name('paid_application');
     Route::get('/admin/application/unpaid', [App\Http\Controllers\Admin\ApplicationController::class, 'view_unpaid_application'])->name('unpaid_application');

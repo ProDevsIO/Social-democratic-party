@@ -23,4 +23,15 @@ class CategoriesService
         return Categories::create($request);
     }
 
+    public function updateCategory($request, $id)
+    {
+        unset($request['_token']);
+        return Categories::where('id', $id)->update($request);
+    }
+
+    public function deleteCategory($id)
+    {
+        return Categories::where('id', $id)->delete();
+    }
+
 }

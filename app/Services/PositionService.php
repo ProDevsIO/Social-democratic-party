@@ -22,4 +22,15 @@ class PositionService
         return Position::create($request);
     }
 
+    public function updatePositions($request, $id)
+    {
+        unset($request['_token']);
+        return Position::where('id', $id)->update($request);
+    }
+
+    public function deletePositions($id)
+    {
+        return Position::where('id', $id)->delete();
+    }
+
 }

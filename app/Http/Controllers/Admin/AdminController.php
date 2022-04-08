@@ -90,6 +90,51 @@ class AdminController extends Controller
       
     }
 
+    public function edit_category(Request $request, $id)
+    {
+      
+        DB::beginTransaction();
+        try {
+            $this->validate($request, [
+                'name' => "required",
+            ]);
+
+            $categoryService = new CategoriesService;
+            $categoryService->updateCategory($request->all(), $id);
+            DB::commit();
+
+            session()->flash('alert-success', "Categeory updated successfully");
+            return back();
+        } catch (\Exception $e) {
+            DB::rollback();
+           dd($e);
+            session()->flash('alert-danger', "Couldnt complete this action. Something went wrong");
+            return back();
+        }
+      
+    }
+
+    public function delete_category($id)
+    {
+      
+        DB::beginTransaction();
+        try {
+
+            $categoryService = new CategoriesService;
+            $categoryService->deleteCategory($id);
+            DB::commit();
+
+            session()->flash('alert-success', "Categeory deleted successfully");
+            return back();
+        } catch (\Exception $e) {
+            DB::rollback();
+           dd($e);
+            session()->flash('alert-danger', "Couldnt complete this action. Something went wrong");
+            return back();
+        }
+      
+    }
+
     public function view_positions()
     {
        
@@ -120,6 +165,47 @@ class AdminController extends Controller
             return back();
         }
       
+    }
+
+    public function edit_positions(Request $request,$id)
+    {
+        DB::beginTransaction();
+        try {
+            $this->validate($request, [
+                'name' => "required",
+            ]);
+
+            $positionService = new PositionService;
+            $positionService->updatePositions($request->all(), $id);
+            DB::commit();
+
+            session()->flash('alert-success', "Subcategory updated successfully");
+            return back();
+        } catch (\Exception $e) {
+            DB::rollback();
+           dd($e);
+            session()->flash('alert-danger', "Couldnt complete this action. Something went wrong");
+            return back();
+        }
+    }
+
+    public function delete_positions($id)
+    {
+        DB::beginTransaction();
+        try {
+    
+            $positionService = new PositionService;
+            $positionService->deletePositions($id);
+            DB::commit();
+
+            session()->flash('alert-success', "Subcategory deleted successfully");
+            return back();
+        } catch (\Exception $e) {
+            DB::rollback();
+           dd($e);
+            session()->flash('alert-danger', "Couldnt complete this action. Something went wrong");
+            return back();
+        }
     }
 
     public function view_form_positions($id)

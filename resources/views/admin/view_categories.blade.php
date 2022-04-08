@@ -37,7 +37,7 @@
                                         <tr>
 
                                             <th>Name</th>
-                                        
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,7 +46,48 @@
                                                 <td class="table-user">
                                                     {{$category->name}}
                                                 </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Action <i class="mdi mdi-chevron-down"></i>
+                                                                </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editcategory{{$category->id}}">Edit</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);" onclick="action('{{$category->id}}', '/admin/category/delete/')" >Delete</a>
+                                                                        
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             </tr>
+                                            <div id="editcategory{{$category->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    <form action="category/edit/{{$category->id}}" method="post">
+                                                    @csrf
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="standard-modalLabel">Edit category</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class=" row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="first_name" class="form-label">Name*</label>
+                                                                        <input required name="name" type="text" value="{{old('name') ?? $category->name}}"
+                                                                            class="form-control" placeholder="Enter Name" required>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                        </div>
+                                                    </form>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
                                             @endforeach 
                                     </tbody>
                                 </table>
