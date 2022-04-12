@@ -27,7 +27,7 @@ class PaymentService
                     'name' => $app->first_name . " " . $app->last_name
                 ],
                 "customizations" => [
-                    "title" => "Form Application payment"
+                    "title" => "Form Application Payment"
                 ]
             ];
 
@@ -60,14 +60,20 @@ class PaymentService
 
     public function confirm_flutterwave($txRef)
     {
+        if (env('APP_ENV', "LIVE") == "LIVE") {
+            $url = "https://api.ravepay.co/flwv3-pug/getpaidx/api/v2/verify";
+        } else {
+            $url = "https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2/verify";
+        }
+
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, env('RAV_VERIFY_URL', "https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2/verify"));
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt(
             $ch,
             CURLOPT_POSTFIELDS,
-            "txref=" . $txRef . "&SECKEY=" . env('RAVE_SECRET_KEY', 'FLWSECK_test-516babb36b12f7f60ae0a118dcc9482a-X')
+            "txref=" . $txRef . "&SECKEY=" . env('RAVE_SECRET_KEY', 'FLWSECK_TEST-516babb36b12f7f60ae0a118dcc9482a-X')
         );
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
